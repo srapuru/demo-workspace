@@ -1,0 +1,4 @@
+# this directory should have only protobuf files
+# ignore any files accidentally generated here
+*.go
+*.java

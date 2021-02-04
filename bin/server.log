@@ -1,0 +1,6 @@
+2021/02/04 18:59:25 ==== Starting the server 
+2021/02/04 18:59:25 failed to listen: listen tcp :9999: bind: address already in use
+2021/02/04 18:59:39 ==== Starting the client 
+2021/02/04 18:59:39 Greeting: Hello GRPC
+2021/02/04 18:59:42 ==== Starting the client 
+2021/02/04 18:59:42 Greeting: Hello GRPC
