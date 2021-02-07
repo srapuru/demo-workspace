@@ -11,24 +11,18 @@ BINDIR=../bin
 COPYFILES= cp ../../EWS/micro/copyfiles/*
 PROTODIR=generated
 PROTOINPUT=proto
-MODULES=$(wildcard $(SRCDIR)/*.go) 
 
 .PHONY: all
 
 all: deps build
 
-emsupport: $(MODULES)
-	$(GOBUILD) EmsMicro/EmsSupport
-	$(GOBUILD) EmsMicro/mains
-	echo $(MODULES)
-
 build: $(BINDIR)/client $(BINDIR)/server
 
 
-$(BINDIR)/server: $(PROTODIR)/Sample.pb.go 
+$(BINDIR)/server: $(PROTODIR)/Sample.pb.go   server/*.go
 	$(GOBUILD) -o $@ $(GOPATH)/src/server
 
-$(BINDIR)/client: $(PROTODIR)/Sample.pb.go 
+$(BINDIR)/client: $(PROTODIR)/Sample.pb.go  client/*.go
 	$(GOBUILD) -o $@ $(GOPATH)/src/client
 
 $(PROTODIR)/Sample.pb.go: $(PROTOINPUT)/Sample.proto

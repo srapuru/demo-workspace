@@ -9,6 +9,7 @@ import (
 	"os"
 	"generated"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 const (
@@ -45,12 +46,12 @@ func main() {
 	}
 
 	//create server 
-	s := grpc.NewServer()
-	generated.RegisterHelloServiceServer(s, &server{})
-
+	srv := grpc.NewServer()
+	generated.RegisterHelloServiceServer(srv, &server{})
+	reflection.Register(srv)
 
 	//start server 
-	if err := s.Serve(lis); err != nil {
+	if err := srv.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 

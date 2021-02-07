@@ -17,7 +17,7 @@ const (
 
 func main() {
 
-	fmt.Printf("Please see the logfile client.log ")
+	fmt.Printf("Please see the logfile client.log \n")
     file, err := os.OpenFile("client.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 
     if err != nil {
@@ -36,19 +36,22 @@ func main() {
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
+
 	defer conn.Close()
+
 	c := generated.NewHelloServiceClient(conn)
 
 	// Contact the server and print out its response.
 	name := defaultName
 
-	//read args from inputs as needed by the rpgram
+	log.Print("==== Client started successfully ");
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+
 	defer cancel()
-	r, err := c.Hello(ctx, &generated.HelloRequest{Name: name})
-	if err != nil {
-		log.Fatalf("ERROR in HelloRequest : %v", err)
-	}
-	log.Printf("Response from the HelloRequest : %s", r.GetMessage())
+	res, err := c.Hello(ctx, &generated.HelloRequest{Name: name})
+		if err != nil {
+				log.Fatalf("ERROR in HelloRequest : %v", err)
+		}
+	log.Printf("Response from the HelloRequest : %s", res.GetMessage())
 }

@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+   server:
+     build: 
+       context: .
+       dockerfile: src/server/Dockerfile 
+     image: server:1.0
+     container_name: server_container
+     ports:
+        - "9999:9999"
+
+   client:
+     build: 
+       context: .
+       dockerfile: src/client/Dockerfile 
+     image: client:1.0
+     network_mode: host
+     depends_on:
+           - server
+     container_name: client_container
